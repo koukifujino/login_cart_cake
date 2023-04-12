@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>掲示板_DB_twig版</title>
+</head>
+
+<body>
+<p><a href="../public/shopping.php">Hello, shopping!マイページへ戻る</a></p>
+    <form method="post" action="">
+        <table>
+            <tr>
+                <th>お客様のお名前</th>
+                <td><input type="text" name="name" value=""></td>
+            </tr>
+            <tr>
+                <th>コメント</th>
+                <td><textarea name="contents" rows="4" cols="20"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" name="send" value="書き込む"></td>
+            </tr>
+        </table>
+    </form>
+    {# テンプレートファイル内で書き込まれたメッセージを表示する #}
+{% if msg|length > 0 %}
+    <p>{{ msg }}</p>
+{% endif %}
+
+{% if err_msg|length > 0 %}
+    <p style="color:#f00;">{{ err_msg }}</p>
+{% endif %}
+
+    <table>
+        <tr>
+            <th>&nbsp;</th>
+            <th>お客様のお名前</th>
+            <th>コメント</th>
+        </tr>
+
+{# 書き込まれたデータを表示する #}
+{% for key , value in data %}
+    <tr>
+        <td>&nbsp;</td>
+        <td>{{ value.name }}</td>
+        <td>{{ value.contents|nl2br }}</td>
+    </tr>
+{% endfor %}
+
+    </table>
+</body>
+
+</html>
